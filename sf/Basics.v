@@ -140,6 +140,8 @@ Example test_next_weekday:
 
 Proof. simpl. reflexivity.  Qed.
 
+Print test_next_weekday.
+
 (** The details are not important for now (we'll come back to
     them in a bit), but essentially this can be read as "The assertion
     we've just made can be proved by observing that both sides of the
@@ -189,6 +191,32 @@ Definition andb (b1:bool) (b2:bool) : bool :=
   | true => b2 
   | false => false
   end.
+
+(* Prof's example *)
+
+Definition andb2 (b1:bool) (b2:bool) : bool := 
+  match b2 with 
+  | true => b1 
+  | false => false
+  end.
+
+Lemma andb_eq_andb2: forall (b1 b2: bool),
+andb b1 b2 = andb2 b1 b2.
+Proof.
+intros.
+destruct b1.
+- destruct b2.
+  + simpl. reflexivity.
+  + simpl. reflexivity.
+- destruct b2.
+  + simpl. reflexivity.
+  + simpl. reflexivity.
+Qed.
+
+Print andb_eq_andb2.
+
+(* End Prof's example *)
+
 
 Definition orb (b1:bool) (b2:bool) : bool := 
   match b1 with 
@@ -364,6 +392,10 @@ Definition pred (n : nat) : nat :=
 
 End Playground1.
 
+Print nat.
+Check (S(S O)).
+Check 3.
+
 Definition minustwo (n : nat) : nat :=
   match n with
     | O => O
@@ -429,6 +461,44 @@ Fixpoint plus (n : nat) (m : nat) : nat :=
     | O => m
     | S n' => S (plus n' m)
   end.
+
+(* Prof example *)
+Lemma add_assoc_0:
+  forall (m k : nat), plus 0 (plus m k) = plus (plus 0 m) k.
+Proof.
+  simpl.
+  reflexivity.
+Qed.
+
+Lemma add_assoc_n_Sn: forall n:nat,
+  (forall m k : nat, plus n (plus m k) = plus (plus n m) k)
+  ->
+  (forall m k : nat, plus (S n) (plus m k) = plus (plus (S n) m) k)
+.
+Proof.
+  intros n.
+  intros Hn.
+  intros m'.
+  intros k'.
+  
+  simpl plus at 1.
+  simpl plus at 4.
+  simpl plus at 3.
+
+  specialize (Hn m' k').
+  rewrite Hn.
+  reflexivity.
+Qed.
+
+Lemma add_assoc: forall (n m k : nat),
+  plus n (plus m k) = plus (plus n m) k.
+Proof.
+  induction n.
+  - apply add_assoc_0.
+  - revert n IHn. apply add_assoc_n_Sn.
+Qed.
+(* End Prof example *)
+
 
 (** Adding three to two now gives us five, as we'd expect. *)
 
