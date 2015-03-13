@@ -69,13 +69,22 @@ Proof. reflexivity.  Qed.
     [compute], which is like [simpl] on steroids.  However, there is a
     simple, elegant solution for which [simpl] suffices. *)
 
-Definition blt_nat (n m : nat) : bool :=
-  (* FILL IN HERE *) admit.
+Fixpoint blt_nat (n m : nat) : bool :=
+  match n with
+  | O => match m with
+         | O => false
+         | S m' => true
+         end
+  | S n' => match m with
+         | O => false
+         | S m' => blt_nat n' m'
+         end
+  end.
 
 Example test_blt_nat1:             (blt_nat 2 2) = false.
-(* FILL IN HERE *) Admitted.
+Proof. reflexivity. Qed.
 Example test_blt_nat2:             (blt_nat 2 4) = true.
-(* FILL IN HERE *) Admitted.
+Proof. reflexivity. Qed.
 Example test_blt_nat3:             (blt_nat 4 2) = false.
-(* FILL IN HERE *) Admitted.
+Proof. reflexivity. Qed.
 (** [] *)
