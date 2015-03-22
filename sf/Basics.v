@@ -889,8 +889,12 @@ Theorem negb_involutive : forall b : bool,
   negb (negb b) = b.
 Proof.
   intros b. destruct b.
-    reflexivity.
-    reflexivity.  Qed.
+    (* Prof Example *)
+    (* instead of using - and + *)
+    { reflexivity. }
+    { reflexivity. }
+    (* End Prof Example *)
+Qed.
 
 (** Note that the [destruct] here has no [as] clause because
     none of the subcases of the [destruct] need to bind any variables,
