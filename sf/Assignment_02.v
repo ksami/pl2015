@@ -1,9 +1,19 @@
 (** **** Problem #1 : 2 stars (mult_S_1) *)
+Theorem plus_1_l : forall n:nat, 1 + n = S n. 
+Proof.
+  intros n. reflexivity.  Qed.
+
 Theorem mult_S_1 : forall n m : nat,
   m = S n -> 
   m * (1 + n) = m * m.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros n.
+  intros m.
+  intros H.
+  rewrite -> plus_1_l.
+  rewrite <- H.
+  reflexivity. 
+Qed.
 (** [] *)
 
 
