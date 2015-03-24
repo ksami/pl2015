@@ -1,4 +1,6 @@
 (** **** Problem #1 : 2 stars (mult_S_1) *)
+Require Export Basics.
+(*
 Theorem plus_1_l : forall n:nat, 1 + n = S n. 
 Proof.
   intros n. reflexivity.  Qed.
@@ -13,9 +15,8 @@ Proof.
   rewrite -> plus_1_l.
   rewrite <- H.
   reflexivity. 
-Qed.
+Qed.*)
 (** [] *)
-
 
 
 
@@ -37,7 +38,16 @@ Fixpoint beq_nat (n m : nat) : bool :=
 Theorem zero_nbeq_plus_1 : forall n : nat,
   beq_nat 0 (n + 1) = false.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  destruct n.  
+  {
+    simpl.
+    reflexivity.
+  }
+  {
+    simpl. 
+    reflexivity. 
+  }
+Qed.
 (** [] *)
 
 
