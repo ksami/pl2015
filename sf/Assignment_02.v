@@ -23,6 +23,7 @@ Qed.*)
 
 
 (** **** Problem #2 : 1 star (zero_nbeq_plus_1) *)
+(*
 Fixpoint beq_nat (n m : nat) : bool :=
   match n with
   | O => match m with
@@ -47,7 +48,7 @@ Proof.
     simpl. 
     reflexivity. 
   }
-Qed.
+Qed.*)
 (** [] *)
 
 
@@ -65,8 +66,20 @@ Theorem negation_fn_applied_twice :
   (forall (x : bool), f x = negb x) ->
   forall (b : bool), f (f b) = b.
 Proof.
-  (* FILL IN HERE *) Admitted.
-
+  destruct b.
+  {
+    rewrite -> H.
+    rewrite -> H.
+    simpl.
+    reflexivity. 
+  }
+  {
+    rewrite -> H.
+    rewrite -> H.
+    simpl.
+    reflexivity. 
+  }
+Qed.
 
 
 
