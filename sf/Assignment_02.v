@@ -60,7 +60,7 @@ Qed.*)
 (** **** Problem #3 : 2 stars (boolean functions) *)
 (** Use the tactics you have learned so far to prove the following 
     theorem about boolean functions. *)
-
+(*
 Theorem negation_fn_applied_twice : 
   forall (f : bool -> bool), 
   (forall (x : bool), f x = negb x) ->
@@ -79,7 +79,7 @@ Proof.
     simpl.
     reflexivity. 
   }
-Qed.
+Qed.*)
 
 
 
@@ -90,14 +90,61 @@ Qed.
 (** Prove the following theorem.  (You may want to first prove a
     subsidiary lemma or two. Alternatively, remember that you do
     not have to introduce all hypotheses at the same time.) *)
+Lemma andb_short_t : forall b : bool,
+  andb b true = b.
+Proof.
+  destruct b.
+  { simpl. reflexivity. }
+  { simpl. reflexivity. }
+Qed. 
+
+Lemma andb_short_f : forall b: bool,
+  andb b false = false.
+Proof.
+  destruct b.
+  { simpl. reflexivity. }
+  { simpl. reflexivity. }
+Qed.
+
+Lemma orb_short_t : forall b : bool,
+  orb b true = true.
+Proof.
+  destruct b.
+  { simpl. reflexivity. }
+  { simpl. reflexivity. }
+Qed.
+
+Lemma orb_short_f : forall b : bool,
+  orb b false = b.
+Proof.
+  destruct b.
+  { simpl. reflexivity. }
+  { simpl. reflexivity. }
+Qed.
 
 Theorem andb_eq_orb : 
   forall (b c : bool),
   (andb b c = orb b c) ->
   b = c.
 Proof.
-  (* FILL IN HERE *) Admitted.
-
+  intros b.
+  intros c.
+  destruct c.
+  { 
+    rewrite -> andb_short_t.
+    rewrite -> orb_short_t.
+    intros H.
+    rewrite -> H.
+    reflexivity.
+  }
+  {
+    rewrite -> andb_short_f.
+    rewrite -> orb_short_f.
+    intros H.
+    rewrite -> H.
+    reflexivity.
+  }
+Qed.
 
 
 
