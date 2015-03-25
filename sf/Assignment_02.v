@@ -298,12 +298,39 @@ Qed.
 Theorem mult_plus_distr_r : forall n m p : nat,
   (n + m) * p = (n * p) + (m * p).
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros n.
+  intros m.
+  intros p.
+  induction n.
+  {
+    simpl.
+    reflexivity.
+  }
+  {
+    simpl.
+    rewrite -> IHn.
+    apply plus_assoc.
+  }
+Qed.
 
 Theorem mult_assoc : forall n m p : nat,
   n * (m * p) = (n * m) * p.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros n.
+  intros m.
+  intros p.
+  induction n.
+  {
+    simpl.
+    reflexivity.
+  }
+  {
+    simpl.
+    rewrite -> IHn.
+    rewrite -> mult_plus_distr_r.
+    reflexivity.
+  }
+Qed.
 (** [] *)
 
 
