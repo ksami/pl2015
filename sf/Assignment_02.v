@@ -1,6 +1,4 @@
 (** **** Problem #1 : 2 stars (mult_S_1) *)
-Require Export Basics.
-(*
 Theorem plus_1_l : forall n:nat, 1 + n = S n. 
 Proof.
   intros n. reflexivity.  Qed.
@@ -15,7 +13,7 @@ Proof.
   rewrite -> plus_1_l.
   rewrite <- H.
   reflexivity. 
-Qed.*)
+Qed.
 (** [] *)
 
 
@@ -23,7 +21,7 @@ Qed.*)
 
 
 (** **** Problem #2 : 1 star (zero_nbeq_plus_1) *)
-(*
+
 Fixpoint beq_nat (n m : nat) : bool :=
   match n with
   | O => match m with
@@ -48,7 +46,7 @@ Proof.
     simpl. 
     reflexivity. 
   }
-Qed.*)
+Qed.
 (** [] *)
 
 
@@ -60,7 +58,7 @@ Qed.*)
 (** **** Problem #3 : 2 stars (boolean functions) *)
 (** Use the tactics you have learned so far to prove the following 
     theorem about boolean functions. *)
-(*
+
 Theorem negation_fn_applied_twice : 
   forall (f : bool -> bool), 
   (forall (x : bool), f x = negb x) ->
@@ -79,7 +77,7 @@ Proof.
     simpl.
     reflexivity. 
   }
-Qed.*)
+Qed.
 
 
 
