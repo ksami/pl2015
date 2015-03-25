@@ -370,7 +370,11 @@ Definition swap_pair (p : natprod) : natprod :=
 Theorem snd_fst_is_swap : forall (p : natprod),
   (snd p, fst p) = swap_pair p.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros p.
+  destruct p as [n m].
+  simpl.
+  reflexivity.
+Qed.
 (** [] *)
 
 
