@@ -170,8 +170,7 @@ Qed.
 Theorem rev_involutive : forall l : natlist,
   rev (rev l) = l.
 Proof.
-  (* FILL IN HERE *) Admitted.
-
+  (* //TODO *) Admitted.
 
 (** There is a short solution to the next exercise.  If you find
     yourself getting tangled up, step back and try to look for a
@@ -179,7 +178,18 @@ Proof.
 Theorem app_assoc4 : forall l1 l2 l3 l4 : natlist,
   l1 ++ (l2 ++ (l3 ++ l4)) = ((l1 ++ l2) ++ l3) ++ l4.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  induction l4.
+  {
+    rewrite -> app_assoc.
+    rewrite -> app_assoc.
+    reflexivity.
+  }
+  {
+    rewrite -> app_assoc.
+    rewrite -> app_assoc.
+    reflexivity.
+  }
+Qed.
 
 
 Theorem snoc_append : forall (l:natlist) (n:nat),
