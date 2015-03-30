@@ -323,20 +323,57 @@ Qed.
 Check beq_nat.
 
 Fixpoint beq_natlist (l1 l2 : natlist) : bool :=
-  (* FILL IN HERE *) admit.
+  match l1 with
+  | nil => match l2 with
+           | nil => true
+           | s :: e => false
+           end
+  | h :: t => match l2 with
+           | nil => false
+           | s :: e => if beq_nat h s then beq_natlist t e else false
+           end
+  end.
 
 Example test_beq_natlist1 :   (beq_natlist nil nil = true).
- (* FILL IN HERE *) Admitted.
+  Proof. simpl. reflexivity. Qed.
 Example test_beq_natlist2 :   beq_natlist [1;2;3] [1;2;3] = true.
- (* FILL IN HERE *) Admitted.
+  Proof. simpl. reflexivity. Qed.
 Example test_beq_natlist3 :   beq_natlist [1;2;3] [1;2;4] = false.
- (* FILL IN HERE *) Admitted.
+  Proof. simpl. reflexivity. Qed.
 
 (** Hint: You may need to first prove a lemma about reflexivity of beq_nat. *)
+Lemma beq_nat_refl : forall n : nat,
+  beq_nat n n = true.
+Proof.
+  induction n.
+  {
+    simpl.
+    reflexivity.
+  }
+  {
+    simpl.
+    rewrite -> IHn.
+    reflexivity.
+  }
+Qed.
+  
+
+
 Theorem beq_natlist_refl : forall l:natlist,
   beq_natlist l l = true.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  induction l.
+  {
+    simpl.
+    reflexivity.
+  }
+  {
+    simpl.
+    rewrite -> beq_nat_refl.
+    rewrite -> IHl.
+    reflexivity.
+  }
+Qed.
 (** [] *)
 
 
