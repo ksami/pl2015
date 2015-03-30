@@ -167,10 +167,55 @@ Qed.
 
 
 (** Hint: You may need to first state and prove some lemma about snoc and rev. *)
+Lemma snoc_cons_assoc : forall l : natlist, forall m n : nat,
+  snoc (n :: l) m = n :: snoc l m.
+Proof.
+  intros l m n.
+  induction l.
+  {
+    simpl.
+    reflexivity.
+  }
+  {
+    simpl.
+    reflexivity.
+  }
+Qed.
+
+Lemma rev_snoc : forall l : natlist, forall n : nat,
+  rev (snoc l n) = n :: (rev l).
+Proof.
+  intros l n.
+  induction l.
+  {
+    simpl.
+    reflexivity.
+  }
+  {
+    simpl.
+    rewrite -> IHl.
+    rewrite -> snoc_cons_assoc.
+    reflexivity.
+  }   
+Qed.
+
 Theorem rev_involutive : forall l : natlist,
   rev (rev l) = l.
 Proof.
-  (* //TODO *) Admitted.
+  intros l.
+  induction l.
+  {
+    simpl.
+    reflexivity.
+  }
+  {
+    simpl.
+    rewrite -> rev_snoc.
+    rewrite -> IHl.
+    reflexivity.
+  }
+Qed.
+    
 
 (** There is a short solution to the next exercise.  If you find
     yourself getting tangled up, step back and try to look for a
