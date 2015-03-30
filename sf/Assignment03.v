@@ -71,15 +71,20 @@ Definition option_elim (d : nat) (o : natoption) : nat :=
 
 
 (** **** Problem #1 (10 pts) : 2 stars (list_funs) *)
-(** Complete the definitions of [nonzeros], [oddmembers] and
-    [countoddmembers] below. Have a look at the tests to understand
+(** Complete the definitions of [nonzeros] below. 
+    Have a look at the tests to understand
     what these functions should do. *)
 
 Fixpoint nonzeros (l:natlist) : natlist :=
-  (* FILL IN HERE *) admit.
+  match l with
+  | nil => nil
+  | h :: t => if beq_nat h 0 then nonzeros t else [h] ++ nonzeros t
+  end.
 
 Example test_nonzeros:            nonzeros [0;1;0;2;3;0;0] = [1;2;3].
- (* FILL IN HERE *) Admitted.
+Proof.
+  simpl. reflexivity.
+Qed.
 
 (** [] *)
 
