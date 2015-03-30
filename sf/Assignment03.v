@@ -195,20 +195,66 @@ Qed.
 Theorem snoc_append : forall (l:natlist) (n:nat),
   snoc l n = l ++ [n].
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros l n.
+  induction l.
+  {
+    simpl.
+    reflexivity.
+  }
+  {
+    simpl.
+    rewrite -> IHl.
+    reflexivity.
+  }
+Qed.
 
 
 Theorem distr_rev : forall l1 l2 : natlist,
   rev (l1 ++ l2) = (rev l2) ++ (rev l1).
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros l1 l2.
+  induction l1.
+  {
+    simpl.
+    rewrite -> app_nil_end.
+    reflexivity.
+  }
+  {
+    simpl.
+    rewrite -> IHl1.
+    rewrite -> snoc_append.
+    rewrite -> snoc_append.
+    rewrite -> app_assoc.
+    reflexivity.
+  }
+Qed.
 
 
 (** An exercise about your implementation of [nonzeros]: *)
 Theorem nonzeros_app : forall l1 l2 : natlist,
   nonzeros (l1 ++ l2) = (nonzeros l1) ++ (nonzeros l2).
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros l1 l2.
+  induction l1.
+  {
+    simpl.
+    reflexivity.
+  }
+  {
+    simpl.
+    destruct n.
+    {
+      simpl.
+      rewrite -> IHl1.
+      reflexivity.
+    }
+    {
+      simpl.
+      rewrite -> IHl1.
+      reflexivity.
+    }
+  }
+Qed.
 
 (** [] *)
 
