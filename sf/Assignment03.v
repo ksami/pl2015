@@ -398,8 +398,29 @@ Qed.
 Theorem rev_injective: forall l1 l2 : natlist, 
   rev l1 = rev l2 -> l1 = l2.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros l1 l2.
+  induction l1.
+  {
+    simpl.
+    intros H.
+    rewrite <- rev_involutive.
+    rewrite <- H.
+    simpl.
+    reflexivity.
+  }
+  {
+    simpl.
+    intros H.
+    rewrite <- rev_involutive.
+    rewrite <- H.
+    rewrite -> rev_snoc.
+    rewrite -> rev_involutive.
+    reflexivity.
+  }
+Qed.
 
+    
+    
 (** [] *)
 
 
@@ -421,7 +442,7 @@ Proof.
 (** Using the same idea, fix the [hd] function from earlier so we don't
    have to pass a default element for the [nil] case.  *)
 
-Definition hd_opt (l : natlist) : natoption :=
+.Definition hd_opt (l : natlist) : natoption :=
   (* FILL IN HERE *) admit.
 
 Example test_hd_opt1 : hd_opt [] = None.
