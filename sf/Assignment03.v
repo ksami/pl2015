@@ -152,7 +152,18 @@ Qed.
 Theorem app_nil_end : forall l : natlist, 
   l ++ [] = l.   
 Proof.
-  (* FILL IN HERE *) Admitted.
+  induction l.
+  {
+    simpl.
+    reflexivity.
+  }
+  {
+    simpl.
+    rewrite -> IHl.
+    reflexivity.
+  }
+Qed.
+    
 
 
 (** Hint: You may need to first state and prove some lemma about snoc and rev. *)
