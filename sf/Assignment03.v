@@ -583,17 +583,33 @@ Definition snd {X Y : Type} (p : X * Y) : Y :=
 Fixpoint split
            {X Y : Type} (l : list (X*Y))
            : (list X) * (list Y) :=
-(* FILL IN HERE *) admit.
+  match l with
+  | [] => pair [] []
+  | h :: t => pair ( [fst h] ++ (fst (split t)) ) ( [snd h] ++ (snd (split t)) )
+  end.
 
 Example test_split:
   split [(1,false);(2,false)] = ([1;2],[false;false]).
 Proof.
-(* FILL IN HERE *) Admitted.
+  simpl.
+  reflexivity.
+Qed.
 
 Theorem split_map: forall X Y (l: list (X*Y)),
-   fst (split l) = map fst l.
+  fst (split l) = map fst l.
 Proof.
-(* FILL IN HERE *) Admitted.
+  intros X Y l.
+  induction l.
+  {
+    simpl.
+    reflexivity.
+  }
+  {
+    simpl.
+    rewrite -> IHl.
+    reflexivity.
+  }
+Qed.
 
 (** [] *)
 
