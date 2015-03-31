@@ -500,6 +500,10 @@ Proof.
   Case "l1 = nil".
     reflexivity.
   Case "l1 = cons n l1'".
+    (* prof example *)
+    assert (X: [] ++ [1] = [1]). reflexivity.
+    simpl in X. simpl in *.
+    (* end prof example *)
     simpl. rewrite -> IHl1'. reflexivity.  Qed.
 
 (** Again, this Coq proof is not especially illuminating as a
