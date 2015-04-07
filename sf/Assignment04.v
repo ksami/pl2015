@@ -480,7 +480,22 @@ Definition fold_length {X : Type} (l : list X) : nat :=
 Theorem fold_length_correct : forall X (l : list X),
   fold_length l = length l.
 Proof.
-(* FILL IN HERE *) Admitted. 
+  intros X l.
+  induction l.
+  {
+    unfold fold_length.
+    simpl.
+    reflexivity.
+  }
+  {
+    unfold fold_length.
+    simpl.
+    unfold fold_length in IHl.
+    rewrite -> IHl.
+    reflexivity.
+  }
+Qed.
+    
 (** [] *)
 
 
