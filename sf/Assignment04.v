@@ -775,7 +775,34 @@ Qed.
 Theorem beq_nat_true : forall n m,
     beq_nat n m = true -> n = m.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros n.
+  induction n.
+  {
+    intros m.
+    intros H.
+    destruct m.
+    {
+      reflexivity.
+    }
+    {
+      inversion H.
+    }
+  }
+  {
+    intros m.
+    intros H.
+    destruct m.
+    {
+      inversion H.
+    }
+    {
+      apply f_equal.
+      apply IHn.
+      apply H.
+    }
+  }
+Qed.
+    
 (** [] *)
 
 
@@ -801,7 +828,32 @@ Theorem index_after_last: forall (n : nat) (X : Type) (l : list X),
      length l = n ->
      index n l = None.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros n X l.
+  generalize dependent n.
+  induction l.
+  {
+    intros n.
+    simpl.
+    reflexivity.
+  }
+  {
+    intros n.
+    destruct n.
+    {
+      simpl.
+      intros H.
+      inversion H.
+    }
+    {
+      simpl.
+      intros H.
+      inversion H.
+      apply IHl.
+      reflexivity.
+    }
+  }
+Qed.
+      
 (** [] *)
 
 
@@ -826,7 +878,23 @@ Theorem double_induction: forall (P : nat -> nat -> Prop),
   (forall m n, P m n -> P (S m) (S n)) ->
   forall m n, P m n.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros P.
+  intros H.
+  induction m.
+  {
+    induction n.
+    apply H.
+    apply H1.
+    apply IHn.
+  }
+  {
+    induction n.
+    apply H0.
+    apply IHm.
+    apply H2.
+    apply IHm.
+  }
+Qed.
 (** [] *)
 
 
