@@ -1069,41 +1069,49 @@ Theorem filter_exercise : forall (X : Type) (test : X -> bool)
      filter test l = x :: lf ->
      test x = true.
 Proof.
-(* //TODO *) d
-(*
+(* //TODO *)
   intros X test x l lf.
-  induction l.
+  generalize dependent l.
+  induction lf.
   {
-    simpl.
-    intros H.
-    inversion H.
-  }
-  {
-    simpl.
-    destruct (test x0) eqn:tx0.
+    induction l.
     {
-      destruct (filter test l) eqn:ftl.
-        apply IHl.
+      intros H.
+      inversion H.
+    }
+    {
       simpl.
-   
-
-(*
-  intros X test x l lf.
-  induction l.
+      destruct (test x0) eqn:tx.
+      {
+        intros H.
+        inversion H.
+        rewrite H1 in tx.
+        apply tx.
+      }
+      {
+        apply IHl.
+      }
+    }
+  }
   {
+    intros l.
+        
+    (*
     simpl.
-    intros H.
+    intros test lf H.
     inversion H.
   }
   {
+    intros test lf.
     simpl.
-    destruct (test x0) eqn:t_x0.
-      rewrite IHl.
-        intros H.
-        reflexivity.
-        destruct (filter test l) eqn:f_tl.
-      apply t_x0.
-      
+    destruct (test x0) eqn:tx.
+    {
+      intros lf.
+      destruct (filter test l) eqn:ftl.
+      apply IHn in tx.
+    
+    
+
 (** [] *)
 
 
