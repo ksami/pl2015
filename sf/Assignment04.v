@@ -1094,23 +1094,26 @@ Proof.
     }
   }
   {
-    intros l.
-        
-    (*
-    simpl.
-    intros test lf H.
-    inversion H.
-  }
-  {
-    intros test lf.
-    simpl.
-    destruct (test x0) eqn:tx.
+    induction l.
     {
-      intros lf.
-      destruct (filter test l) eqn:ftl.
-      apply IHn in tx.
-    
-    
+      intros H.
+      inversion H.
+    }
+    {
+      simpl.
+      destruct (test x1) eqn:tx.
+      {
+        intros H.
+        inversion H.
+        rewrite H1 in tx.
+        apply tx.
+      }
+      {
+        apply IHl.
+      }
+    }
+  }
+Qed.
 
 (** [] *)
 
