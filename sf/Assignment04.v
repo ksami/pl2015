@@ -1069,7 +1069,6 @@ Theorem filter_exercise : forall (X : Type) (test : X -> bool)
      filter test l = x :: lf ->
      test x = true.
 Proof.
-(* //TODO *)
   intros X test x l lf.
   generalize dependent l.
   induction lf.
