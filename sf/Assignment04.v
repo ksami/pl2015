@@ -515,9 +515,11 @@ Qed.
 (** **** Problem #11 (20 pts) : 3 stars (fold_map) *)
 (** We can also define [map] in terms of [fold].  Finish [fold_map]
     below. *)
+Check @fold.
+Print fold.
 
 Definition fold_map {X Y:Type} (f : X -> Y) (l : list X) : list Y :=
-(* FILL IN HERE *) admit.
+  (*fold (fun x => f x) _ l _.*) admit. (* //TODO *)
 
 (** Prove the correctness of [fold_map]. *)
 
@@ -557,7 +559,9 @@ Theorem silly_ex :
      evenb 3 = true ->
      oddb 4 = true.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros H.
+  apply H.
+Qed.
 (** [] *)
 
 
@@ -574,12 +578,15 @@ Proof.
 (** Hint: you can use [apply] with previously defined lemmas, not
     just hypotheses in the context.  Remember that [SearchAbout] is
     your friend. *)
-
 Theorem rev_exercise1 : forall (l l' : list nat),
      l = rev l' ->
      rev l = l'.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros l l'.
+  intros H.
+  rewrite -> H.
+  apply rev_involutive.
+Qed.
 (** [] *)
 
 
@@ -605,7 +612,11 @@ Example trans_eq_exercise : forall (n m o p : nat),
      (n + p) < (minustwo o) ->
      (n + p) < m. 
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros n m o p H H0.
+  apply trans_lt with (m:=(minustwo o)).
+  apply H0.
+  apply H.
+Qed.
 (** [] *)
 
 
@@ -625,7 +636,12 @@ Example sillyex1 : forall (X : Type) (x y z : X) (l j : list X),
      y :: l = x :: j ->
      x = y.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros.
+  inversion H.
+  inversion H0.
+  symmetry.
+  apply H2.
+Qed.
 (** [] *)
 
 
@@ -648,7 +664,9 @@ Example sillyex2 : forall (X : Type) (x y z : X) (l j : list X),
      y :: l = z :: j ->
      x = z.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros.
+  inversion H.
+Qed.
 (** [] *)
 
 
@@ -670,7 +688,11 @@ Proof.
 Theorem beq_nat_0_l : forall n,
    beq_nat 0 n = true -> n = 0.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros.
+  destruct n.
+  reflexivity.
+  inversion H.
+Qed.
 
 (** [] *)
 
@@ -700,7 +722,35 @@ Proof.
   intros n. induction n as [| n'].
     (* Hint: use the [destruct] and [inversion] tactics. *)
     (* Hint: use the plus_n_Sm lemma *)
-    (* FILL IN HERE *) Admitted.
+  {
+    simpl.
+    intros m H.
+    destruct m.
+    {
+      reflexivity.
+    }
+    {
+      inversion H.
+    }
+  }
+  {
+    intros m H.
+    destruct m.
+    {
+      inversion H.
+    }
+    {
+      simpl in H.
+      inversion H.
+      rewrite <- plus_n_Sm in H1.
+      rewrite <- plus_n_Sm in H1.
+      inversion H1.
+      apply IHn' in H2.
+      apply f_equal.
+      apply H2.
+    }
+  }
+Qed.
 (** [] *)
 
 
@@ -727,6 +777,7 @@ Theorem beq_nat_true : forall n m,
 Proof.
   (* FILL IN HERE *) Admitted.
 (** [] *)
+
 
 
 
