@@ -1002,7 +1002,37 @@ Theorem override_same : forall (X:Type) x1 k1 k2 (f : nat->X),
   f k1 = x1 -> 
   (override f k1 x1) k2 = f k2.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros X x1.
+  induction k1.
+  {
+    intros k2 f H.
+    unfold override.
+    destruct (beq_nat 0 k2) eqn:Hbeq.
+    {
+      apply beq_nat_true in Hbeq.
+      rewrite <- Hbeq.
+      symmetry.
+      apply H.
+    }
+    {
+      reflexivity.
+    }
+  }
+  {
+    intros k2 f H.
+    unfold override.
+    destruct (beq_nat (S k1) k2) eqn:Hbeq.
+    {
+      apply beq_nat_true in Hbeq.
+      rewrite <- Hbeq.
+      symmetry.
+      apply H.
+    }
+    {
+      reflexivity.
+    }
+  }
+Qed.
 (** [] *)
 
 
