@@ -519,14 +519,31 @@ Check @fold.
 Print fold.
 
 Definition fold_map {X Y:Type} (f : X -> Y) (l : list X) : list Y :=
-  (*fold (fun x => f x) _ l _.*) admit. (* //TODO *)
+  fold (fun h t => f h :: t)l [].
 
 (** Prove the correctness of [fold_map]. *)
 
 Theorem fold_map_correct : forall (X Y:Type) (f : X -> Y) (l : list X),
   fold_map f l = map f l.
 Proof.
-(* FILL IN HERE *) Admitted. 
+  intros X Y f l.
+  induction l.
+  {
+    simpl.
+    unfold fold_map.
+    simpl.
+    reflexivity.
+  }
+  {
+    simpl.
+    unfold fold_map.
+    simpl.
+    unfold fold_map in IHl.
+    rewrite <- IHl.
+    reflexivity.
+  }
+Qed.
+    
 
 (** [] *)
 
@@ -1052,7 +1069,41 @@ Theorem filter_exercise : forall (X : Type) (test : X -> bool)
      filter test l = x :: lf ->
      test x = true.
 Proof.
-  (* FILL IN HERE *) Admitted.
+(* //TODO *) d
+(*
+  intros X test x l lf.
+  induction l.
+  {
+    simpl.
+    intros H.
+    inversion H.
+  }
+  {
+    simpl.
+    destruct (test x0) eqn:tx0.
+    {
+      destruct (filter test l) eqn:ftl.
+        apply IHl.
+      simpl.
+   
+
+(*
+  intros X test x l lf.
+  induction l.
+  {
+    simpl.
+    intros H.
+    inversion H.
+  }
+  {
+    simpl.
+    destruct (test x0) eqn:t_x0.
+      rewrite IHl.
+        intros H.
+        reflexivity.
+        destruct (filter test l) eqn:f_tl.
+      apply t_x0.
+      
 (** [] *)
 
 
