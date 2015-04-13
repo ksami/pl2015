@@ -28,7 +28,15 @@ Theorem ev_plus_plus : forall n m p,
 Proof.
   intros n m p.
   intros Hnm Hnp.
-  apply ev_ev__ev with (n:=(m+p)) (m:=(m+p)). 
+  apply ev_ev__ev with (n:=n) (m:=m) in Hnm.
+  apply ev_ev__ev with (n:=n) (m:=p) in Hnp.
+  apply ev_sum.
+    apply Hnm.
+    apply Hnp.
+  
+    
+   
+   apply ev_ev__ev with (n:=(m+p)) (m:=(m+p)). 
     rewrite <- plus_assoc.
     rewrite -> plus_comm with (n:=p) (m:=(m+p)).
     rewrite -> plus_assoc.
@@ -39,7 +47,6 @@ Proof.
     apply ev_sum.
       apply double_even.
       apply double_even.
-      
       (* //TODO *)
     
 Qed.
