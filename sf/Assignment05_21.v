@@ -11,7 +11,13 @@ Require Export Assignment05_20.
 Theorem ev_sum : forall n m,
    ev n -> ev m -> ev (n+m).
 Proof. 
-  (* FILL IN HERE *) admit.
+  intros n m.
+  intros Hn Hm.
+  induction Hn.
+    apply Hm.
+    induction Hm.
+      apply ev_SS. apply IHHn.
+      simpl. apply ev_SS. apply IHHn.
 Qed.
 (** [] *)
 

@@ -17,9 +17,16 @@ Proof.
     apply g_0.
     apply g_plus3. apply g_0.
     apply g_plus5. apply g_0.
-    induction n.
-      simpl. apply IHbeautiful2.
-      simpl. apply IHn. (* //TODO *)
+    induction H0.
+
+    induction IHbeautiful1.
+      apply IHbeautiful1.
+
+      apply g_plus3.
+      apply IHIHbeautiful1. 
+
+
+(* //TODO *)
 
 
 
