@@ -17,23 +17,9 @@ Proof.
     apply g_0.
     apply g_plus3. apply g_0.
     apply g_plus5. apply g_0.
-    induction H0.
-
-    induction IHbeautiful1.
+    apply gorgeous_sum.
       apply IHbeautiful1.
-
-      apply g_plus3.
-      apply IHIHbeautiful1. 
-
-
-(* //TODO *)
-
-
-
       apply IHbeautiful2.
-      apply g_plus3. apply IHIHbeautiful1. induction n.
-        apply b_0.
-        apply b_sum
 Qed.
 (** [] *)
 
