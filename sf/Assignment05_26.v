@@ -22,15 +22,14 @@ Lemma even__ev_strong: forall n : nat,
   (even (pred n) -> ev (pred n)) /\ (even n -> ev n).
 Proof.
   intros n.
-  split.
-  {
-    intros H.
-    inversion H.
-    induction n.
-      simpl. apply ev_0.
-      simpl.
-  }
-
+  induction n.
+    split.
+      intros H. simpl. apply ev_0.
+      intros H. apply ev_0.
+      
+    split.
+      simpl. apply IHn.
+      assert (h: even (S n)=even (pred n)).
 (* //TODO *)
 
 Qed.
