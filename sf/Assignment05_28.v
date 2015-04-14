@@ -23,31 +23,33 @@ Require Export Assignment05_27.
 Inductive pal {X: Type} : list X -> Prop :=
   | pal_nil : pal []
   | pal_c : forall l, l = rev l -> pal l
-  | pal_spl : forall l1 l2, l1 = l2 -> pal (l1 ++ l2)
 .
 
 Theorem pal_app_rev: forall (X: Type) (l: list X),
   pal (l ++ rev l).
 Proof.
   intros X l.
-  induction l.
-    apply pal_spl. simpl. reflexivity.
-
-(* //TODO *)
-
-  apply pal_spl.
   apply pal_c.
   induction l.
-    apply pal_nil.
-    inversion IHl.
-      apply pal_c. simpl. reflexivity.
-      apply pal_c. simpl. rewrite <- H. unfold snoc. reflexivity.
+    simpl.
+    reflexivity.
+
+    simpl.
+    rewrite <- snoc_with_append.
+    rewrite -> rev_snoc.
+    simpl.
+    rewrite <- IHl.
+    reflexivity.
 Qed.
 
 Theorem pal_rev: forall (X: Type) (l: list X),
   pal l -> l = rev l.
 Proof.
-  (* FILL IN HERE *) admit.
+  intros X l.
+  intros H.
+  inversion H.
+    simpl. reflexivity.
+    apply H0.
 Qed.
 
 (** [] *)
