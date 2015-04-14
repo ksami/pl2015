@@ -5,6 +5,12 @@ Require Export Assignment05_35.
 Theorem ble_nat_true : forall n m,
   ble_nat n m = true -> n <= m.
 Proof. 
-  (* FILL IN HERE *) admit.
+  intros n m.
+  induction n.
+    intros H. apply O_le_n.
+    induction m.
+      intros H. simpl in H. inversion H.
+      
+      (* //TODO *)
 Qed.
 

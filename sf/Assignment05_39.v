@@ -5,7 +5,11 @@ Require Export Assignment05_38.
 Theorem ble_nat_false : forall n m,
   ble_nat n m = false -> ~(n <= m).
 Proof.
-  (* FILL IN HERE *) admit.
+  intros n m.
+  intros H.
+  induction n.
+  SearchAbout not.
+  (* //TODO *)
 Qed.
 (** [] *)
 

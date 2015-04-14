@@ -6,6 +6,11 @@ Theorem lt_S : forall n m,
   n < m ->
   n < S m.
 Proof.
-  (* FILL IN HERE *) admit.
+  unfold lt.
+  intros n m.
+  intros H.
+  inversion H.
+    apply le_S. apply le_n.
+    apply le_S. rewrite H2. apply H.
 Qed.
 

@@ -17,6 +17,8 @@ Proof.
   intros H0 H1.
   induction H0.
     apply H1.
-    inversion IHle.
+    inversion H1.
+      apply le_S. apply H0.
+      apply le_S. 
 (* //TODO *)
 Qed.
