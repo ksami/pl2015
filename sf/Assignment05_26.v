@@ -21,17 +21,17 @@ Require Export Assignment05_25.
 Lemma even__ev_strong: forall n : nat, 
   (even (pred n) -> ev (pred n)) /\ (even n -> ev n).
 Proof.
-  intros n.
   induction n.
     split.
       intros H. simpl. apply ev_0.
       intros H. apply ev_0.
-      
     split.
       simpl. apply IHn.
-      assert (h: even (S n)=even (pred n)).
-(* //TODO *)
-
+      intros H. induction n.
+        inversion H.
+        simpl in IHn. induction IHn. apply ev_SS in H0.
+          apply H0.
+          unfold even. inversion H. reflexivity.
 Qed.
 (** [] *)
 
