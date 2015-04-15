@@ -14,33 +14,14 @@ Proof.
     intros P HF.
     inversion HF.
 
-  intros n m H.
+  intros n.
   induction n.
     induction m.
-      unfold not in H. simpl. apply f. apply H. reflexivity.
+      intros H. unfold not in H. simpl. apply f. apply H. reflexivity.
       simpl. reflexivity.
-      unfold not in H. induction . apply H.
-
-
-
-
-
-
-
-
-  unfold not in H.
-  destruct beq_nat.
-    destruct n.
-      induction m.
-          apply f.
-          apply H.
-          reflexivity.
-          
-          apply f. apply H.
-          apply f.
-
-(* //TODO *)
-
+    intros m H. unfold not in H. unfold not in IHn. induction m.
+      simpl. reflexivity.
+      simpl. apply IHn. intros H1. apply H. rewrite H1. reflexivity.
 Qed.
 (** [] *)
 
