@@ -12,18 +12,12 @@ Proof.
     intros P HF.
     inversion HF.
 
-  intros n m.
-  unfold not.
-  destruct beq_nat.
-    intros H.
-    induction n.
-      intros Hm.
-    intros Hnm.
-    inversion Hnm.
-    apply f.
-
-  (* //TODO *)
-
+  intros n.
+  induction n.
+    induction m.
+      intros H. unfold not. inversion H.
+      intros H. unfold not. intros H1. inversion H1.
+    intros m H. unfold not. intros H1. rewrite H1 in H. rewrite <- beq_nat_refl in H. inversion H.
 Qed.
 (** [] *)
 
