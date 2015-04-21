@@ -9,7 +9,30 @@ Require Export Assignment06_02.
 Theorem dist_exists_or : forall (X:Type) (P Q : X -> Prop),
   (exists x, P x \/ Q x) <-> (exists x, P x) \/ (exists x, Q x).
 Proof.
-   (* FILL IN HERE *) admit.
+   intros X P Q.
+   split.
+     intros H.
+     inversion H as [x H1].
+     inversion H1.
+       left.
+       exists x.
+       apply H0.
+
+       right.
+       exists x.
+       apply H0.
+
+    intros H.
+    inversion H.
+      inversion H0 as [x H1].
+      exists x.
+      left.
+      apply H1.
+
+      inversion H0 as [x H1].
+      exists x.
+      right.
+      apply H1.
 Qed.
 (** [] *)
 
