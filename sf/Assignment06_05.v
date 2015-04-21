@@ -8,7 +8,9 @@ Require Export Assignment06_04.
     asserts that [P] is true for every element of the list [l]. *)
 
 Inductive all {X : Type} (P : X -> Prop) : list X -> Prop :=
-  (* FILL IN HERE *)
+  | all_nil : all P []
+  | all_this : forall x l, all P (x::l)
+  | all_later : forall x l, all P l -> all P (x::l)
 .
 
 (** Recall the function [forallb], from the exercise
@@ -30,7 +32,16 @@ Fixpoint forallb {X : Type} (test : X -> bool) (l : list X) : bool :=
 Theorem forallb_correct: forall X (P: X -> bool) l,
   forallb P l = true <-> all (fun x => P x = true) l.
 Proof.
-  (* FILL IN HERE *) admit.
+  intros X P l.
+  induction l.
+    split.
+      intros H. apply all_nil.
+      intros H. simpl. reflexivity.
+
+    split.
+      intros H. apply all_this.
+      intros H. simpl. inversion IHl. apply H1.
+      (* //TODO *)
 Qed.
 
 (** [] *)

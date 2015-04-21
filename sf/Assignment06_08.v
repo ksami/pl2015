@@ -14,23 +14,32 @@ Require Export Assignment06_07.
 
 Lemma app_length : forall (X:Type) (l1 l2 : list X),
   length (l1 ++ l2) = length l1 + length l2. 
-Proof. 
-  (* FILL IN HERE *) admit.
+Proof.
+  intros X l1 l2.
+  induction l1.
+    simpl. reflexivity.
+    simpl. rewrite IHl1. reflexivity.
 Qed.
 
 Lemma appears_in_app_split : forall (X:Type) (x:X) (l:list X),
   appears_in x l -> 
   exists l1, exists l2, l = l1 ++ (x::l2).
 Proof.
-  (* FILL IN HERE *) admit.
-Qed.
+  intros X x.
+  induction l.
+    intros H. inversion H.
+    intros H. inversion H.
+      (* //TODO *)
+      Admitted.
+
 
 (** Now define a predicate [repeats] (analogous to [no_repeats] in the
    exercise above), such that [repeats X l] asserts that [l] contains
    at least one repeated element (of type [X]).  *)
 
 Inductive repeats {X:Type} : list X -> Prop :=
-  (* FILL IN HERE *)
+  | rp_nil : repeats []
+  | rp_here : forall x l, repeats l -> repeats (x::l)
 .
 
 (** Now here's a way to formalize the pigeonhole principle. List [l2]
@@ -50,7 +59,12 @@ Theorem pigeonhole_principle: forall (X:Type) (l1  l2:list X),
    length l2 < length l1 -> 
    repeats l1.  
 Proof.
-   intros X l1. induction l1 as [|x l1'].
-   (* FILL IN HERE *) admit. admit.
+  intros X l1. induction l1 as [|x l1'].
+    intros l2 H. unfold excluded_middle in H.
+    intros H1. unfold lt. simpl. intros H2. inversion H2.
+
+    intros l2 H. unfold excluded_middle in H.
+    intros H1. unfold lt. simpl. intros H2. apply rp_here. inversion H2.
+(* //TODO *)
 Qed.
 

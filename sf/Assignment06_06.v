@@ -18,7 +18,10 @@ Inductive appears_in {X:Type} (a:X) : list X -> Prop :=
 Lemma appears_in_app : forall (X:Type) (xs ys : list X) (x:X), 
      appears_in x (xs ++ ys) -> appears_in x xs \/ appears_in x ys.
 Proof.
-  (* FILL IN HERE *) admit.
+  intros X xs ys x.
+  induction xs.
+    intros H. simpl in H. right. apply H.
+    (* //TODO *)
 Qed.
 
 Lemma app_appears_in : forall (X:Type) (xs ys : list X) (x:X), 
