@@ -10,7 +10,7 @@ Require Export Assignment06_04.
 Inductive all {X : Type} (P : X -> Prop) : list X -> Prop :=
   | all_nil : all P []
   | all_this : forall x l, all P (x::l)
-  | all_later : forall x l, all P l -> all P (x::l)
+  | all_later : forall x l, all P l -> P x -> all P (x::l)
 .
 
 (** Recall the function [forallb], from the exercise
@@ -36,13 +36,12 @@ Proof.
   induction l.
     split.
       intros H. apply all_nil.
-      intros H. simpl. reflexivity.
+      intros H. simpl in H. inversion H. simpl. reflexivity.
 
     split.
       intros H. apply all_this.
-      intros H. simpl. inversion IHl. apply H1.
+      intros H. inversion IHl. simpl. apply andb_true_intro with (b:=(P x)) (c:=(forallb P l)). split.
       (* //TODO *)
 Qed.
 
 (** [] *)
-

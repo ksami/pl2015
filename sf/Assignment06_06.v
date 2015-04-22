@@ -21,12 +21,27 @@ Proof.
   intros X xs ys x.
   induction xs.
     intros H. simpl in H. right. apply H.
-    (* //TODO *)
+    SearchAbout or.
+    intros H. simpl in H. inversion H.
+      left. apply ai_here.
+      apply IHxs in H1. inversion H1.
+        left. apply ai_later. apply H3.
+        right. apply H3.
 Qed.
 
 Lemma app_appears_in : forall (X:Type) (xs ys : list X) (x:X), 
      appears_in x xs \/ appears_in x ys -> appears_in x (xs ++ ys).
 Proof.
-  (* FILL IN HERE *) admit.
+  intros X xs ys x.
+  intros H.
+  induction xs.
+    inversion H.
+      inversion H0.
+      simpl. apply H0.
+    inversion H.
+      inversion H0.
+        simpl. apply ai_here.
+        simpl. apply ai_later. apply IHxs. left. apply H2.
+      simpl. apply ai_later. apply IHxs. right. apply H0.
 Qed.
 

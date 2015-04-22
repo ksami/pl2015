@@ -17,7 +17,7 @@ Require Export Assignment06_06.
 Inductive nostutter:  list nat -> Prop :=
   | ns_nil : nostutter []
   | ns_one : forall x, nostutter [x]
-  | ns_more : forall x y l, x <> y -> nostutter (x::y::l)
+  | ns_more : forall x y l, x <> y -> nostutter (y::l) -> nostutter (x::y::l)
 .
 
 (** Make sure each of these tests succeeds, but you are free
@@ -57,8 +57,6 @@ Example test_nostutter_4:      not (nostutter [3;1;1;4]).
     h: nostutter _ |- _ => inversion h; clear h; subst 
   end.
   contradiction H1; auto. Qed.
-
-(* //TODO *)
 
 (** [] *)
 

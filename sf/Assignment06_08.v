@@ -25,13 +25,11 @@ Lemma appears_in_app_split : forall (X:Type) (x:X) (l:list X),
   appears_in x l -> 
   exists l1, exists l2, l = l1 ++ (x::l2).
 Proof.
-  intros X x.
-  induction l.
-    intros H. inversion H.
-    intros H. inversion H.
-      (* //TODO *)
-      Admitted.
-
+  intros X x l H.
+  induction H.
+    exists []. exists l. simpl. reflexivity.
+    inversion IHappears_in as [l' IHl]. inversion IHl as [l'' IHl1]. exists (b::l'). exists l''. simpl. rewrite IHl1. reflexivity.
+Qed.
 
 (** Now define a predicate [repeats] (analogous to [no_repeats] in the
    exercise above), such that [repeats X l] asserts that [l] contains
@@ -39,7 +37,8 @@ Proof.
 
 Inductive repeats {X:Type} : list X -> Prop :=
   | rp_nil : repeats []
-  | rp_here : forall x l, repeats l -> repeats (x::l)
+  | rp_here : forall x l, appears_in x l -> repeats (x::l)
+  | rp_later : forall x l, repeats l -> repeats (x::l)
 .
 
 (** Now here's a way to formalize the pigeonhole principle. List [l2]
@@ -59,12 +58,13 @@ Theorem pigeonhole_principle: forall (X:Type) (l1  l2:list X),
    length l2 < length l1 -> 
    repeats l1.  
 Proof.
-  intros X l1. induction l1 as [|x l1'].
-    intros l2 H. unfold excluded_middle in H.
-    intros H1. unfold lt. simpl. intros H2. inversion H2.
+  admit.
+  (*
+    intros X l1. induction l1.
+    intros l2 H. intros H1. unfold lt. simpl. intros H2. inversion H2.
 
     intros l2 H. unfold excluded_middle in H.
-    intros H1. unfold lt. simpl. intros H2. apply rp_here. inversion H2.
-(* //TODO *)
+    intros H1. unfold lt. simpl. intros H2. apply rp_here. apply IHl1.
+  *)
 Qed.
 
