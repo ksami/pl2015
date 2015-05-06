@@ -29,11 +29,13 @@ Proof.
         induction e1;
           simpl; try reflexivity; try omega.
           induction e2;
-            simpl; try reflexivity; try omega.
-            simpl in IHaevalR1.
+            simpl; try reflexivity; try omega;
+            try (simpl; inversion H0_0; inversion H0_; reflexivity).
+            inversion H0_0.
       (* //TODO *)
       generalize dependent H0. generalize dependent H. simpl.
-Qed.
+      Admitted.
+
 
 (** [] *)
 
