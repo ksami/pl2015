@@ -6,7 +6,14 @@ Require Export Assignment07_04.
 Theorem update_eq : forall n x st,
   (update st x n) x = n.
 Proof.
-  (* FILL IN HERE *) admit.
+  intros n x st.
+  induction x.
+  induction n.
+    unfold update.
+    induction n0.
+      simpl. reflexivity.
+      apply eq_id.
+    apply eq_id.
 Qed.
 (** [] *)
 
