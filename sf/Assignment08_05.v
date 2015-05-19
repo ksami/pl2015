@@ -7,7 +7,13 @@ Require Export Assignment08_04.
     same as pushing the value of the expression on the stack. *)
 
 Fixpoint s_compile (e : aexp) : list sinstr :=
-  FILL_IN_HERE.
+  match e with
+  | ANum n => [SPush n]
+  | AId x => [SLoad x]
+  | APlus a1 a2 => (s_compile a1) ++ (s_compile a2) ++ [SPlus]
+  | AMinus a1 a2 => (s_compile a1) ++ (s_compile a2) ++ [SMinus]
+  | AMult a1 a2 => (s_compile a1) ++ (s_compile a2) ++ [SMult]
+  end.
 
 (** After you've defined [s_compile], prove the following to test
     that it works. *)
@@ -16,7 +22,7 @@ Example s_compile1 :
     s_compile (AMinus (AId X) (AMult (ANum 2) (AId Y)))
   = [SLoad X; SPush 2; SLoad Y; SMult; SMinus].
 Proof.
-  exact FILL_IN_HERE.
+  reflexivity.
 Qed.
 
 (** **** Exercise: 3 stars, advanced (stack_compiler_correct)  *)
@@ -36,6 +42,9 @@ Qed.
 Theorem s_compile_correct : forall (st : state) (e : aexp),
   s_execute st [] (s_compile e) = [ aeval st e ].
 Proof.
+  intros st e.
+  induction e; try reflexivity.
+  (* //TODO *)
   exact FILL_IN_HERE.
 Qed.
 

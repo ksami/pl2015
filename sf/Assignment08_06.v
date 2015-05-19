@@ -10,8 +10,14 @@ Theorem skip_right: forall c,
   cequiv 
     (c;; SKIP) 
     c.
-Proof. 
-  exact FILL_IN_HERE.
+Proof.
+  intros c.
+  unfold cequiv.
+  split.
+    intros H. inversion H. subst.
+    inversion H2. subst. assumption. subst.
+    (* //TODO *)
+    exact FILL_IN_HERE.
 Qed.
 
 (*-- Check --*)
