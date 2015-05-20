@@ -7,7 +7,12 @@ Theorem assign_aequiv : forall X e,
   aequiv (AId X) e -> 
   cequiv SKIP (X ::= e).
 Proof.
-  exact FILL_IN_HERE.
+  intros X e.
+  intros H.
+  unfold cequiv.
+  split.
+    unfold aequiv in H.
+    (* //TODOD .. S
 Qed.
 
 (*-- Check --*)

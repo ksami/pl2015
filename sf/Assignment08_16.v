@@ -5,7 +5,16 @@ Require Export Assignment08_15.
 Lemma optimize_0plus_aexp_sound:
   atrans_sound optimize_0plus_aexp.
 Proof.
-  exact FILL_IN_HERE.
+  unfold atrans_sound.
+  intros a.
+  induction a;
+    try (simpl; apply refl_aequiv).
+    destruct a1.
+      destruct n.
+        unfold aequiv. simpl. apply IHa2.
+        unfold aequiv. unfold aequiv in IHa2. 
+        simpl. intros st. rewrite IHa2.
+        (* //TODO*)
 Qed.
 
 (*-- Check --*)
