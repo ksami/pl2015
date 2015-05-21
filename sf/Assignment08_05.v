@@ -39,14 +39,15 @@ Qed.
     general lemma to get a usable induction hypothesis; the main
     theorem will then be a simple corollary of this lemma. *)
 
+
 Theorem s_compile_correct : forall (st : state) (e : aexp),
   s_execute st [] (s_compile e) = [ aeval st e ].
 Proof.
   intros st e.
   induction e; try reflexivity.
+  simpl.
   (* //TODO *)
   exact FILL_IN_HERE.
-Qed.
 
 (*-- Check --*)
 Check s_compile1 :

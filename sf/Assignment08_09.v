@@ -32,17 +32,31 @@ Theorem WHILE_true: forall b c,
      cequiv 
        (WHILE b DO c END)
        (WHILE BTrue DO SKIP END).
-Proof. 
-  intros b c.
-  intros H.
+Proof.
+  intros b c H st st'.
   split.
-    intros H1.
-    inversion H1.
-    apply E_WhileLoop with st.
-      reflexivity.
-      apply E_Skip.
-    (* //TODO *)
-  exact FILL_IN_HERE.
+    intros H1. inversion H1. subst.
+      apply ex_falso_quodlibet.
+      generalize H1.
+      apply WHILE_true_nonterm.
+      apply H.
+
+      subst.
+      apply ex_falso_quodlibet.
+      generalize H1.
+      apply WHILE_true_nonterm.
+      apply H.
+
+    intros H1. inversion H1. subst.
+      apply ex_falso_quodlibet.
+      generalize H1.
+      apply WHILE_true_nonterm.
+      apply refl_bequiv.
+
+      apply ex_falso_quodlibet.
+      generalize H1.
+      apply WHILE_true_nonterm.
+      apply refl_bequiv.
 Qed.
 
 (*-- Check --*)

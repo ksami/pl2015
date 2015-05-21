@@ -57,9 +57,14 @@ Proof.
     destruct (fold_constants_bexp b) eqn:Heqb.
       apply WHILE_true. apply H.
       apply WHILE_false. apply H.
-      split; intros Hs.
-      (* //TODO *)
-        replace (BEq a a0) with b. replace (fold_constants_com c) with c. apply Hs.
+      apply CWhile_congruence.
+        apply H. apply IHc.
+      apply CWhile_congruence.
+        apply H. apply IHc.
+      apply CWhile_congruence.
+        apply H. apply IHc.
+      apply CWhile_congruence.
+        apply H. apply IHc.
 Qed.
 
 (*-- Check --*)
