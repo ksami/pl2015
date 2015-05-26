@@ -6,7 +6,8 @@ Require Export Assignment08_17.
 Lemma optimize_0plus_com_sound:
   ctrans_sound optimize_0plus_com.
 Proof.
-  unfold ctrans_sound.
+  exact FILL_IN_HERE.
+(*  unfold ctrans_sound.
   intros c.
   intros st st'.
   induction c.
@@ -20,7 +21,7 @@ Proof.
 
     split; intros H.
       inversion H. subst. simpl. apply E_Seq with st'0.
-        inversion IHc1.
+        inversion IHc1.*)
         (* //TODO *)
 Qed.
 

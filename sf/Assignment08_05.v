@@ -43,11 +43,9 @@ Qed.
 Theorem s_compile_correct : forall (st : state) (e : aexp),
   s_execute st [] (s_compile e) = [ aeval st e ].
 Proof.
-  intros st e.
-  induction e; try reflexivity.
-  simpl.
   (* //TODO *)
   exact FILL_IN_HERE.
+Qed.
 
 (*-- Check --*)
 Check s_compile1 :

@@ -11,13 +11,9 @@ Theorem skip_right: forall c,
     (c;; SKIP) 
     c.
 Proof.
-  intros c.
-  unfold cequiv.
-  split.
-    intros H. inversion H. subst.
-    inversion H2. subst. assumption. subst.
+  exact FILL_IN_HERE.
     (* //TODO *)
-    exact FILL_IN_HERE.
+
 Qed.
 
 (*-- Check --*)
