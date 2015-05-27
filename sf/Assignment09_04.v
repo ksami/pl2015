@@ -17,7 +17,16 @@ Example hoare_asgn_example4 :
   {{fun st => True}} (X ::= (ANum 1);; Y ::= (ANum 2)) 
   {{fun st => st X = 1 /\ st Y = 2}}.
 Proof.
-  exact FILL_IN_HERE.
+exact FILL_IN_HERE.
+(*  eapply hoare_seq.
+  unfold hoare_triple.
+  intros st st' H H1.
+  split.
+    inversion H. subst.
+    inversion H. subst.
+    inversion H2. subst.
+    simpl in H6.*)
+(* //TODO *)
 Qed.
 
 (*-- Check --*)

@@ -7,7 +7,11 @@ Theorem assn_sub_ex2:
      X ::= ANum 3
   {{ fun st => 0 <= st X /\ st X <= 5 }}.
 Proof.
-  exact FILL_IN_HERE.
+  unfold hoare_triple.
+  intros st st' H H1.
+  inversion H. subst.
+  unfold assn_sub in H1.
+  assumption.
 Qed.
 
 (*-- Check --*)

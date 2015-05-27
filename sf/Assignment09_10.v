@@ -64,6 +64,7 @@ Theorem add_three_numbers_correct: forall a b c,
   END
   {{ fun st => st Z = a + b + c }}.
 Proof.
+  (* //TODO *)
   exact FILL_IN_HERE.
 Qed.
 

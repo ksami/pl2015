@@ -45,6 +45,7 @@ Theorem factorial_dec_correct: forall m,
   END
   {{ fun st => st Y = fact m }}.
 Proof.
+  (* //TODO *)
   exact FILL_IN_HERE.
 Qed.
 

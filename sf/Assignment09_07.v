@@ -23,7 +23,15 @@ Theorem slow_addition_dec_correct : forall n m,
   END
   {{fun st => st Y = n + m}}.
 Proof.
-  exact FILL_IN_HERE.
+  (*intros n m.
+  eapply hoare_consequence_post.
+  apply hoare_while.
+  eapply hoare_consequence_pre.
+  eapply hoare_seq.
+  apply hoare_asgn.
+  apply hoare_asgn.*)
+(* //TODO *)
+exact FILL_IN_HERE.
 Qed.
 
 (*-- Check --*)
