@@ -30,7 +30,28 @@ Require Export Assignment10_01.
 
 Theorem step_deterministic_alt: deterministic step.
 Proof.
-  exact FILL_IN_HERE.
+(*
+  unfold deterministic. intros x y1 y2 Hy1 Hy2.
+  generalize dependent y2.
+  step_cases (induction Hy1) Case; intros y2 Hy2.
+    Case "ST_PlusConstConst". step_cases (inversion Hy2) SCase.
+      SCase "ST_PlusConstConst". reflexivity.
+      SCase "ST_Plus1". inversion H2.
+      SCase "ST_Plus2". inversion H3.
+    Case "ST_Plus1". step_cases (inversion Hy2) SCase.
+      SCase "ST_PlusConstConst". rewrite <- H0 in Hy1. inversion Hy1.
+      SCase "ST_Plus1".
+        rewrite <- (IHHy1 t1'0).
+        reflexivity. assumption.
+      SCase "ST_Plus2". rewrite <- H2 in Hy2. inversion Hy2.
+    Case "ST_Plus2". step_cases (inversion Hy2) SCase.
+      SCase "ST_PlusConstConst". rewrite <- H1 in Hy1. inversion Hy1.
+      SCase "ST_Plus1". inversion H2.
+      SCase "ST_Plus2".
+        rewrite <- (IHHy1 t2'0).
+        reflexivity. assumption.  
+*) (* //TODO *)
+exact FILL_IN_HERE.
 Qed.
 
 (*-- Check --*)

@@ -9,6 +9,7 @@ Proof.
   inversion P1 as [P11 P12]; clear P1. inversion P2 as [P21 P22]; clear P2. 
   generalize dependent y2. 
   (* We recommend using this initial setup as-is! *)
+(* //TODO *)
   exact FILL_IN_HERE.
 Qed.
 

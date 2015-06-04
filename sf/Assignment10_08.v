@@ -34,6 +34,10 @@ Require Export Assignment10_07.
 Theorem eval__multistep : forall t n,
   t || n -> t ==>* C n.
 Proof.
+  intros t n H.
+  inversion H.
+    apply multi_refl.
+(* //TODO *)
   exact FILL_IN_HERE.
 Qed.
 
