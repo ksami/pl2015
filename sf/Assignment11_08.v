@@ -9,7 +9,10 @@ Theorem normalize_ex' : exists e',
   (AMult (ANum 3) (AMult (ANum 2) (ANum 1))) / empty_state 
   ==>a* e'.
 Proof.
-  exact FILL_IN_HERE.
+  exists (ANum 6).
+  eapply multi_step. auto. simpl.
+  eapply multi_step. auto. simpl.
+  apply multi_refl.
 Qed.
 
 (*-- Check --*)
